@@ -1,5 +1,10 @@
 # segfault's home-manager config
 
+## Clone
+```bash
+git clone https://github.com/segfaultuwu/home-manager
+```
+
 ## Apply
 ```bash
 home-manager switch --flake .#segfault -b backup
