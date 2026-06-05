@@ -16,6 +16,7 @@
     # ./modules/hyprland.nix # fuck this shit
     ./modules/noctalia.nix
     ./modules/gtk.nix
+    ./modules/nvim.nix
   ];
 
   home.username = "segfault";
