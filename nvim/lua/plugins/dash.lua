@@ -104,7 +104,7 @@ dashboard.setup({
 				key = "h",
 				key_hl = "DashboardKey",
 				key_format = "  [%s]",
-				action = "terminal cd ~/.config/home-manager && home-manager switch --flake .#segfault -b backup",
+				action = "terminal bash -lc 'cd ~/.config/home-manager && home-manager switch --flake .\\#segfault -b backup'",
 			},
 			{
 				icon = "    ",
