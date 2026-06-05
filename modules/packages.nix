@@ -8,6 +8,10 @@
     telegram-desktop
     thunderbird
 
+    desktop-file-utils
+
+    bun
+
     onefetch
     tokei
     hyperfine
@@ -36,7 +40,7 @@
 
     # Catppuccin GTK
     catppuccin-gtk
-    papirus-icon-theme	
+    papirus-icon-theme
     nixd
   ];
 }

@@ -28,4 +28,23 @@ in
       marketplace
     ];
   };
+
+  xdg.desktopEntries.spotify = {
+    name = "Spotify";
+    genericName = "Music Player";
+    comment = "Listen to music and podcasts";
+    exec = "spotify %U";
+    terminal = false;
+    type = "Application";
+    icon = "spotify-client";
+    categories = [
+      "Audio"
+      "Music"
+      "Player"
+      "AudioVideo"
+    ];
+    mimeType = [
+      "x-scheme-handler/spotify"
+    ];
+  };
 }
