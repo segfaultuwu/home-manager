@@ -62,7 +62,7 @@
       oil-nvim
 
       # Treesitter
-      (nvim-treesitter.withAllGrammars)
+      nvim-treesitter.withAllGrammars
 
       # LSP / completion
       nvim-lspconfig
@@ -89,9 +89,10 @@
       trouble-nvim
       flash-nvim
       presence-nvim
+      markdown-preview-nvim
     ];
 
-    extraLuaConfig = builtins.readFile ../nvim/init.lua;
+    initLua = builtins.readFile ../nvim/init.lua;
   };
 
   xdg.configFile."nvim/lua".source = ../nvim/lua;

@@ -3,6 +3,7 @@ require("core.keymaps")
 
 require("plugins.dash")
 require("plugins.theme")
+require("plugins.markdown")
 require("plugins.ui")
 require("plugins.telescope")
 require("plugins.treesitter")
