@@ -15,7 +15,7 @@
     extraPackages = with pkgs; [
       # Nix
       nil
-      nixfmt-rfc-style
+      nixfmt
 
       # Lua
       lua-language-server
@@ -26,7 +26,7 @@
       gofumpt
       gotools
 
-      # TypeScript / JS / web
+      # TypeScript / JS / Web
       typescript-language-server
       vscode-langservers-extracted
       emmet-language-server
@@ -66,9 +66,27 @@
       plenary-nvim
       nvim-tree-lua
       which-key-nvim
+      oil-nvim
 
       # Treesitter
-      nvim-treesitter.withAllGrammars
+      nvim-treesitter
+      nvim-treesitter-parsers.nix
+      nvim-treesitter-parsers.lua
+      nvim-treesitter-parsers.go
+      nvim-treesitter-parsers.python
+      nvim-treesitter-parsers.typescript
+      nvim-treesitter-parsers.javascript
+      nvim-treesitter-parsers.tsx
+      nvim-treesitter-parsers.html
+      nvim-treesitter-parsers.css
+      nvim-treesitter-parsers.json
+      nvim-treesitter-parsers.bash
+      nvim-treesitter-parsers.c
+      nvim-treesitter-parsers.cpp
+      nvim-treesitter-parsers.toml
+      nvim-treesitter-parsers.yaml
+      nvim-treesitter-parsers.markdown
+      nvim-treesitter-parsers.markdown_inline
 
       # LSP / completion
       nvim-lspconfig
@@ -94,10 +112,13 @@
       todo-comments-nvim
       trouble-nvim
       flash-nvim
-      oil-nvim
     ];
 
     extraLuaConfig = ''
+      ------------------------------------------------------------
+      -- Core
+      ------------------------------------------------------------
+
       vim.g.mapleader = " "
       vim.g.maplocalleader = " "
 
@@ -131,203 +152,302 @@
 
       vim.opt.clipboard = "unnamedplus"
 
+      ------------------------------------------------------------
+      -- Helpers
+      ------------------------------------------------------------
+
+      local function safe_require(name)
+        local ok, module = pcall(require, name)
+        if not ok then
+          vim.notify("missing plugin: " .. name, vim.log.levels.WARN)
+          return nil
+        end
+        return module
+      end
+
+      ------------------------------------------------------------
       -- Theme
-      require("catppuccin").setup({
-        flavour = "mocha",
-        transparent_background = true,
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          nvimtree = true,
-          treesitter = true,
-          telescope = true,
-          noice = true,
-          which_key = true,
-          native_lsp = {
-            enabled = true,
-          },
-        },
-      })
+      ------------------------------------------------------------
 
-      vim.cmd.colorscheme("catppuccin")
-
-      -- Lualine
-      require("lualine").setup({
-        options = {
-          theme = "catppuccin",
-          globalstatus = true,
-          section_separators = "",
-          component_separators = "",
-        },
-      })
-
-      -- Bufferline
-      require("bufferline").setup({
-        options = {
-          diagnostics = "nvim_lsp",
-          separator_style = "thin",
-          show_buffer_close_icons = false,
-          show_close_icon = false,
-        },
-      })
-
-      -- Nvim tree
-      require("nvim-tree").setup({
-        view = {
-          width = 32,
-        },
-        renderer = {
-          group_empty = true,
-          icons = {
-            show = {
-              git = true,
-              folder = true,
-              file = true,
+      local catppuccin = safe_require("catppuccin")
+      if catppuccin then
+        catppuccin.setup({
+          flavour = "mocha",
+          transparent_background = true,
+          integrations = {
+            cmp = true,
+            gitsigns = true,
+            nvimtree = true,
+            treesitter = true,
+            telescope = true,
+            noice = true,
+            which_key = true,
+            native_lsp = {
+              enabled = true,
             },
           },
-        },
-        filters = {
-          dotfiles = false,
-        },
-      })
+        })
 
-      -- Oil: better file manager inside nvim
-      require("oil").setup({
-        default_file_explorer = false,
-        view_options = {
-          show_hidden = true,
-        },
-      })
+        vim.cmd.colorscheme("catppuccin")
+      end
 
-      -- Treesitter
-      require("nvim-treesitter.configs").setup({
-        highlight = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        },
-      })
+      ------------------------------------------------------------
+      -- UI
+      ------------------------------------------------------------
 
-      -- Autopairs
-      require("nvim-autopairs").setup({})
-
-      -- Comments
-      require("Comment").setup({})
-
-      -- Gitsigns
-      require("gitsigns").setup({})
-
-      -- Todo comments
-      require("todo-comments").setup({})
-
-      -- Trouble
-      require("trouble").setup({})
-
-      -- Which key
-      require("which-key").setup({})
-
-      -- Flash
-      require("flash").setup({})
-
-      -- Noice
-      require("noice").setup({
-        presets = {
-          bottom_search = true,
-          command_palette = true,
-          long_message_to_split = true,
-        },
-      })
-
-      -- Telescope
-      local telescope = require("telescope")
-      telescope.setup({
-        defaults = {
-          file_ignore_patterns = {
-            "node_modules",
-            ".git/",
-            "dist/",
-            "build/",
-            "target/",
+      local lualine = safe_require("lualine")
+      if lualine then
+        lualine.setup({
+          options = {
+            theme = "catppuccin",
+            globalstatus = true,
+            section_separators = "",
+            component_separators = "",
           },
-        },
-      })
+        })
+      end
 
-      pcall(telescope.load_extension, "fzf")
+      local bufferline = safe_require("bufferline")
+      if bufferline then
+        bufferline.setup({
+          options = {
+            diagnostics = "nvim_lsp",
+            separator_style = "thin",
+            show_buffer_close_icons = false,
+            show_close_icon = false,
+          },
+        })
+      end
 
-      -- Completion
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
+      local noice = safe_require("noice")
+      if noice then
+        noice.setup({
+          presets = {
+            bottom_search = true,
+            command_palette = true,
+            long_message_to_split = true,
+          },
+        })
+      end
 
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
+      local dressing = safe_require("dressing")
+      if dressing then
+        dressing.setup({})
+      end
 
-        mapping = cmp.mapping.preset.insert({
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        }),
+      ------------------------------------------------------------
+      -- File managers
+      ------------------------------------------------------------
 
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path" },
-          { name = "buffer" },
-        }),
-      })
-
-      -- LSP
-      local lspconfig = require("lspconfig")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      local servers = {
-        nil_ls = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" },
+      local nvim_tree = safe_require("nvim-tree")
+      if nvim_tree then
+        nvim_tree.setup({
+          view = {
+            width = 32,
+          },
+          renderer = {
+            group_empty = true,
+            icons = {
+              show = {
+                git = true,
+                folder = true,
+                file = true,
               },
             },
           },
-        },
-        gopls = {},
-        ts_ls = {},
-        html = {},
-        cssls = {},
-        jsonls = {},
-        emmet_language_server = {},
-        pyright = {},
-        ruff = {},
-        clangd = {},
-        bashls = {},
-      }
+          filters = {
+            dotfiles = false,
+          },
+        })
+      end
 
-      for name, opts in pairs(servers) do
-        opts.capabilities = capabilities
-        lspconfig[name].setup(opts)
+      local oil = safe_require("oil")
+      if oil then
+        oil.setup({
+          default_file_explorer = false,
+          view_options = {
+            show_hidden = true,
+          },
+        })
+      end
+
+      ------------------------------------------------------------
+      -- Treesitter
+      ------------------------------------------------------------
+
+      local treesitter = safe_require("nvim-treesitter.configs")
+      if treesitter then
+        treesitter.setup({
+          highlight = {
+            enable = true,
+          },
+          indent = {
+            enable = true,
+          },
+        })
+      end
+
+      ------------------------------------------------------------
+      -- Navigation
+      ------------------------------------------------------------
+
+      local telescope = safe_require("telescope")
+      if telescope then
+        telescope.setup({
+          defaults = {
+            file_ignore_patterns = {
+              "node_modules",
+              ".git/",
+              "dist/",
+              "build/",
+              "target/",
+              ".direnv/",
+              "result/",
+            },
+          },
+        })
+
+        pcall(telescope.load_extension, "fzf")
+      end
+
+      ------------------------------------------------------------
+      -- Quality of life
+      ------------------------------------------------------------
+
+      local autopairs = safe_require("nvim-autopairs")
+      if autopairs then
+        autopairs.setup({})
+      end
+
+      local comment = safe_require("Comment")
+      if comment then
+        comment.setup({})
+      end
+
+      local gitsigns = safe_require("gitsigns")
+      if gitsigns then
+        gitsigns.setup({})
+      end
+
+      local todo = safe_require("todo-comments")
+      if todo then
+        todo.setup({})
+      end
+
+      local trouble = safe_require("trouble")
+      if trouble then
+        trouble.setup({})
+      end
+
+      local which_key = safe_require("which-key")
+      if which_key then
+        which_key.setup({})
+      end
+
+      local flash = safe_require("flash")
+      if flash then
+        flash.setup({})
+      end
+
+      ------------------------------------------------------------
+      -- Completion
+      ------------------------------------------------------------
+
+      local cmp = safe_require("cmp")
+      local luasnip = safe_require("luasnip")
+
+      if cmp and luasnip then
+        cmp.setup({
+          snippet = {
+            expand = function(args)
+              luasnip.lsp_expand(args.body)
+            end,
+          },
+
+          mapping = cmp.mapping.preset.insert({
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+            ["<Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+          }),
+
+          sources = cmp.config.sources({
+            { name = "nvim_lsp" },
+            { name = "luasnip" },
+            { name = "path" },
+            { name = "buffer" },
+          }),
+        })
+      end
+
+      ------------------------------------------------------------
+      -- LSP
+      ------------------------------------------------------------
+
+      local lspconfig = safe_require("lspconfig")
+      local cmp_lsp = safe_require("cmp_nvim_lsp")
+
+      if lspconfig then
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+        if cmp_lsp then
+          capabilities = cmp_lsp.default_capabilities(capabilities)
+        end
+
+        local servers = {
+          nil_ls = {},
+          lua_ls = {
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = { "vim" },
+                },
+              },
+            },
+          },
+          gopls = {},
+          html = {},
+          cssls = {},
+          jsonls = {},
+          emmet_language_server = {},
+          pyright = {},
+          ruff = {},
+          clangd = {},
+          bashls = {},
+        }
+
+        -- TypeScript server name changed in lspconfig history.
+        if lspconfig.ts_ls then
+          servers.ts_ls = {}
+        elseif lspconfig.tsserver then
+          servers.tsserver = {}
+        end
+
+        for name, opts in pairs(servers) do
+          if lspconfig[name] then
+            opts.capabilities = capabilities
+            lspconfig[name].setup(opts)
+          end
+        end
       end
 
       vim.diagnostic.config({
@@ -338,29 +458,34 @@
         severity_sort = true,
       })
 
+      ------------------------------------------------------------
       -- Formatting
-      require("conform").setup({
-        formatters_by_ft = {
-          nix = { "nixfmt" },
-          lua = { "stylua" },
-          go = { "gofumpt" },
-          javascript = { "prettier" },
-          javascriptreact = { "prettier" },
-          typescript = { "prettier" },
-          typescriptreact = { "prettier" },
-          json = { "prettier" },
-          css = { "prettier" },
-          html = { "prettier" },
-          python = { "ruff_format" },
-          sh = { "shfmt" },
-        },
-      })
+      ------------------------------------------------------------
 
-      vim.keymap.set("n", "<leader>f", function()
-        require("conform").format({ async = true, lsp_fallback = true })
-      end, { desc = "Format file" })
+      local conform = safe_require("conform")
+      if conform then
+        conform.setup({
+          formatters_by_ft = {
+            nix = { "nixfmt" },
+            lua = { "stylua" },
+            go = { "gofumpt" },
+            javascript = { "prettier" },
+            javascriptreact = { "prettier" },
+            typescript = { "prettier" },
+            typescriptreact = { "prettier" },
+            json = { "prettier" },
+            css = { "prettier" },
+            html = { "prettier" },
+            python = { "ruff_format" },
+            sh = { "shfmt" },
+          },
+        })
+      end
 
+      ------------------------------------------------------------
       -- Keymaps
+      ------------------------------------------------------------
+
       local map = vim.keymap.set
 
       map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save" })
@@ -380,6 +505,15 @@
 
       map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
       map("n", "<leader>xt", "<cmd>TodoTrouble<CR>", { desc = "TODOs" })
+
+      map("n", "<leader>f", function()
+        local c = safe_require("conform")
+        if c then
+          c.format({ async = true, lsp_fallback = true })
+        else
+          vim.lsp.buf.format({ async = true })
+        end
+      end, { desc = "Format file" })
 
       map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
       map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })

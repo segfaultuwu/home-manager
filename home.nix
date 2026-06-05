@@ -17,6 +17,7 @@
     ./modules/noctalia.nix
     ./modules/gtk.nix
     ./modules/nvim.nix
+    ./modules/spicetify.nix
   ];
 
   home.username = "segfault";

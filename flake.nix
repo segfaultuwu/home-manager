@@ -8,6 +8,11 @@
       url = "github:hyprwm/Hyprland";
     };
 
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +44,7 @@
       home-manager,
       catppuccin,
       noctalia,
+      spicetify-nix,
       ...
     }:
     let
@@ -59,6 +65,7 @@
         modules = [
           catppuccin.homeModules.catppuccin
           noctalia.homeModules.default
+          spicetify-nix.homeManagerModules.default
           ./home.nix
         ];
       };
