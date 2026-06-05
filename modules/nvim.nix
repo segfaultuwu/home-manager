@@ -62,24 +62,7 @@
       oil-nvim
 
       # Treesitter
-      nvim-treesitter
-      nvim-treesitter-parsers.nix
-      nvim-treesitter-parsers.lua
-      nvim-treesitter-parsers.go
-      nvim-treesitter-parsers.python
-      nvim-treesitter-parsers.typescript
-      nvim-treesitter-parsers.javascript
-      nvim-treesitter-parsers.tsx
-      nvim-treesitter-parsers.html
-      nvim-treesitter-parsers.css
-      nvim-treesitter-parsers.json
-      nvim-treesitter-parsers.bash
-      nvim-treesitter-parsers.c
-      nvim-treesitter-parsers.cpp
-      nvim-treesitter-parsers.toml
-      nvim-treesitter-parsers.yaml
-      nvim-treesitter-parsers.markdown
-      nvim-treesitter-parsers.markdown_inline
+      (nvim-treesitter.withAllGrammars)
 
       # LSP / completion
       nvim-lspconfig

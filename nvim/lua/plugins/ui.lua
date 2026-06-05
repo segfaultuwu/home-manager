@@ -7,7 +7,7 @@ end
 
 setup("lualine", {
 	options = {
-		theme = "catppuccin",
+		theme = "catppuccin-nvim",
 		globalstatus = true,
 		section_separators = "",
 		component_separators = "",

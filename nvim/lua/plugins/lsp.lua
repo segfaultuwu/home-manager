@@ -1,8 +1,3 @@
-local ok_lsp, lspconfig = pcall(require, "lspconfig")
-if not ok_lsp then
-	return
-end
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
@@ -30,19 +25,14 @@ local servers = {
 	ruff = {},
 	clangd = {},
 	bashls = {},
+	ts_ls = {},
 }
 
-if lspconfig.ts_ls then
-	servers.ts_ls = {}
-elseif lspconfig.tsserver then
-	servers.tsserver = {}
-end
-
 for name, opts in pairs(servers) do
-	if lspconfig[name] then
-		opts.capabilities = capabilities
-		lspconfig[name].setup(opts)
-	end
+	opts.capabilities = capabilities
+
+	vim.lsp.config(name, opts)
+	vim.lsp.enable(name)
 end
 
 vim.diagnostic.config({

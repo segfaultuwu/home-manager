@@ -30,3 +30,8 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.clipboard = "unnamedplus"
+
+vim.opt.shortmess:append("I")
+vim.opt.shortmess:append("W")
+vim.opt.shortmess:append("c")
+vim.opt.cmdheight = 0

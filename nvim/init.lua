@@ -1,7 +1,7 @@
 require("core.options")
 require("core.keymaps")
 
-require("plugins.dashboard")
+require("plugins.dash")
 require("plugins.theme")
 require("plugins.ui")
 require("plugins.telescope")
