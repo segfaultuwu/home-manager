@@ -51,6 +51,7 @@
       nui-nvim
       dressing-nvim
       indent-blankline-nvim
+      dashboard-nvim
 
       # Navigation
       telescope-nvim
