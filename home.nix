@@ -13,7 +13,7 @@
     ./modules/rofi.nix
     ./modules/dunst.nix
     ./modules/waybar.nix
-    # ./modules/hyprland.nix # fuck this shit
+    ./modules/hyprland.nix # fuck this shit
     ./modules/noctalia.nix
     ./modules/gtk.nix
     ./modules/nvim.nix
