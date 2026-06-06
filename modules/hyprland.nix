@@ -7,7 +7,7 @@
     jq
   ];
 
-  xdg.configFile."hypr/hyprland.lua".source = ../hypr/hyprland.lua;
+  xdg.configFile."hypr/hyprland.lua".source = ../configs/hypr/hyprland.lua;
 
   wayland.windowManager.hyprland = {
     enable = true;

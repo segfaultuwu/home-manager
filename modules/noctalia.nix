@@ -8,20 +8,11 @@
 {
   programs.noctalia = {
     enable = true;
-
-    settings = {
-      bar = {
-        position = "top";
-        density = "compact";
-      };
-
-      shell = {
-        launchAppsAsSystemdServices = true;
-      };
-    };
   };
 
   home.packages = [
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
+
+  xdg.configFile."noctalia/config.toml".source = ../configs/noctalia/config.toml;
 }

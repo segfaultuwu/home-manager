@@ -92,10 +92,10 @@
       markdown-preview-nvim
     ];
 
-    initLua = builtins.readFile ../nvim/init.lua;
+    initLua = builtins.readFile ../configs/nvim/init.lua;
   };
 
-  xdg.configFile."nvim/lua".source = ../nvim/lua;
+  xdg.configFile."nvim/lua".source = ../configs/nvim/lua;
 
   home.sessionVariables = {
     EDITOR = "nvim";

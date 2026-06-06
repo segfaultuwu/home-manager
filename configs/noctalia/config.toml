@@ -1,0 +1,68 @@
+[bar]
+density = "compact"
+position = "top"
+
+[calendar]
+enabled = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = false
+    timeout = 900
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = false
+    timeout = 660
+
+[location]
+auto_locate = true
+
+[osd]
+orientation = "vertical"
+position = "bottom_right"
+
+[shell]
+app_icon_colorize = true
+font_family = "FiraCode Nerd Font"
+launchAppsAsSystemdServices = true
+password_style = "random"
+polkit_agent = true
+settings_show_advanced = true
+telemetry_enabled = true
+
+    [shell.panel]
+    clipboard_placement = "floating"
+    control_center_placement = "floating"
+    launcher_placement = "floating"
+    session_placement = "floating"
+    transparency_mode = "glass"
+    wallpaper_placement = "floating"
+
+[theme]
+builtin = "Catppuccin"
+wallpaper_scheme = "m3-fruit-salad"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "helix", "qt", "starship" ]
+    community_ids = [ "spicetify", "papirus-icons" ]
+
+[wallpaper]
+directory = "/home/segfault/walls"
+
+    [wallpaper.default]
+    path = "/home/segfault/walls/black-hole.png"
+
+    [wallpaper.last]
+    path = "/home/segfault/walls/black-hole.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/segfault/walls/black-hole.png"
