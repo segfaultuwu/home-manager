@@ -18,6 +18,7 @@
     ./modules/gtk.nix
     ./modules/nvim.nix
     ./modules/spicetify.nix
+    ./modules/tmux.nix
   ];
 
   home.username = "segfault";

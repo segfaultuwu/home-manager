@@ -52,7 +52,7 @@ builtin = "Catppuccin"
 wallpaper_scheme = "m3-fruit-salad"
 
     [theme.templates]
-    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "helix", "qt", "starship" ]
+    builtin_ids = [ "btop", "cava", "emacs", "gtk3", "gtk4", "helix", "qt" ]
     community_ids = [ "spicetify", "papirus-icons" ]
 
 [wallpaper]
