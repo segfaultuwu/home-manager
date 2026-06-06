@@ -2,27 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    # terminal / apps
-    kitty
-    floorp
-    pcmanfm
-
-    # launcher / clipboard / screenshots
-    rofi-wayland
-    wl-clipboard
-    cliphist
-    hyprshot
-
-    # tray / system applets
-    networkmanagerapplet
-    blueman
-
-    # media / volume / brightness
-    pamixer
-    brightnessctl
-    playerctl
-
-    # useful wayland tools
     grim
     slurp
     jq
@@ -32,12 +11,6 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-
-    settings = {
-      source = [
-        "~/.config/hypr/hyprland.lua"
-      ];
-    };
   };
 
   systemd.user.services.noctalia-shell = {
