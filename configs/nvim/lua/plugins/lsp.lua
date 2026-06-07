@@ -26,6 +26,7 @@ local servers = {
 	clangd = {},
 	bashls = {},
 	ts_ls = {},
+	gleam = {},
 }
 
 for name, opts in pairs(servers) do

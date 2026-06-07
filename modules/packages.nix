@@ -12,6 +12,8 @@
 
     bun
 
+    gleam
+
     onefetch
     tokei
     hyperfine
@@ -42,5 +44,6 @@
     catppuccin-gtk
     papirus-icon-theme
     nixd
+    rust-analyzer
   ];
 }

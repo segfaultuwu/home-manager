@@ -15,33 +15,31 @@ local settings = noctaliaMsg .. " settings-toggle"
 
 -- Every monitor: preferred, auto position, scale 1
 hl.monitor({
-    output = "",
-    mode = "preferred",
-    position = "auto",
-    scale = 1,
+	output = "",
+	mode = "preferred",
+	position = "auto",
+	scale = 1,
 })
 
 -- Autostart
 hl.on("hyprland.start", function()
-    -- Noctalia: prefer systemd service, fallback to binary
-    hl.exec_cmd(
-        "bash -lc 'systemctl --user start noctalia-shell.service 2>/dev/null || (command -v noctalia-shell >/dev/null && noctalia-shell >/tmp/noctalia.log 2>&1 &)'"
-    )
+	-- Noctalia: prefer systemd service, fallback to binary
+	hl.exec_cmd("bash -lc '(command -v noctalia >/dev/null && noctalia >/tmp/noctalia.log 2>&1 &)'")
 
-    -- Clipboard
-    hl.exec_cmd(
-        "bash -lc 'command -v wl-paste >/dev/null && command -v cliphist >/dev/null && wl-paste --type text --watch cliphist store &'"
-    )
-    hl.exec_cmd(
-        "bash -lc 'command -v wl-paste >/dev/null && command -v cliphist >/dev/null && wl-paste --type image --watch cliphist store &'"
-    )
+	-- Clipboard
+	hl.exec_cmd(
+		"bash -lc 'command -v wl-paste >/dev/null && command -v cliphist >/dev/null && wl-paste --type text --watch cliphist store &'"
+	)
+	hl.exec_cmd(
+		"bash -lc 'command -v wl-paste >/dev/null && command -v cliphist >/dev/null && wl-paste --type image --watch cliphist store &'"
+	)
 
-    -- Wallpaper daemon
-    hl.exec_cmd("bash -lc 'command -v awww-daemon >/dev/null && awww-daemon &'")
+	-- Wallpaper daemon
+	hl.exec_cmd("bash -lc 'command -v awww-daemon >/dev/null && awww-daemon &'")
 
-    -- Tray applets
-    hl.exec_cmd("bash -lc 'command -v nm-applet >/dev/null && nm-applet --indicator &'")
-    hl.exec_cmd("bash -lc 'command -v blueman-applet >/dev/null && blueman-applet &'")
+	-- Tray applets
+	hl.exec_cmd("bash -lc 'command -v nm-applet >/dev/null && nm-applet --indicator &'")
+	hl.exec_cmd("bash -lc 'command -v blueman-applet >/dev/null && blueman-applet &'")
 end)
 
 -- Environment
@@ -55,177 +53,177 @@ hl.env("CLUTTER_BACKEND", "wayland")
 
 -- Main config
 hl.config({
-    input = {
-        kb_layout = "pl",
-        follow_mouse = 1,
-        sensitivity = 0,
+	input = {
+		kb_layout = "pl",
+		follow_mouse = 1,
+		sensitivity = 0,
 
-        touchpad = {
-            natural_scroll = true,
-            tap_to_click = true,
-            disable_while_typing = true,
-        },
-    },
+		touchpad = {
+			natural_scroll = true,
+			tap_to_click = true,
+			disable_while_typing = true,
+		},
+	},
 
-    general = {
-        gaps_in = 5,
-        gaps_out = 10,
-        border_size = 2,
-        layout = "dwindle",
-        resize_on_border = true,
-        allow_tearing = false,
+	general = {
+		gaps_in = 5,
+		gaps_out = 10,
+		border_size = 2,
+		layout = "dwindle",
+		resize_on_border = true,
+		allow_tearing = false,
 
-        col = {
-            active_border = {
-                colors = {
-                    "rgba(cba6f7ff)",
-                    "rgba(89b4faff)",
-                },
-                angle = 45,
-            },
+		col = {
+			active_border = {
+				colors = {
+					"rgba(cba6f7ff)",
+					"rgba(89b4faff)",
+				},
+				angle = 45,
+			},
 
-            inactive_border = "rgba(313244aa)",
-        },
-    },
+			inactive_border = "rgba(313244aa)",
+		},
+	},
 
-    decoration = {
-        rounding = 20,
-        rounding_power = 2,
+	decoration = {
+		rounding = 20,
+		rounding_power = 2,
 
-        active_opacity = 1.0,
-        inactive_opacity = 0.95,
-        fullscreen_opacity = 1.0,
+		active_opacity = 1.0,
+		inactive_opacity = 0.95,
+		fullscreen_opacity = 1.0,
 
-        blur = {
-            enabled = true,
-            size = 5,
-            passes = 2,
-            vibrancy = 0.18,
-            new_optimizations = true,
-        },
+		blur = {
+			enabled = true,
+			size = 5,
+			passes = 2,
+			vibrancy = 0.18,
+			new_optimizations = true,
+		},
 
-        shadow = {
-            enabled = true,
-            range = 10,
-            render_power = 3,
-            color = "rgba(11111b99)",
-        },
-    },
+		shadow = {
+			enabled = true,
+			range = 10,
+			render_power = 3,
+			color = "rgba(11111b99)",
+		},
+	},
 
-    animations = {
-        enabled = true,
-    },
+	animations = {
+		enabled = true,
+	},
 
-    dwindle = {
-        preserve_split = true,
-        smart_split = false,
-        smart_resizing = true,
-    },
+	dwindle = {
+		preserve_split = true,
+		smart_split = false,
+		smart_resizing = true,
+	},
 
-    master = {
-        new_status = "master",
-    },
+	master = {
+		new_status = "master",
+	},
 
-    misc = {
-        disable_hyprland_logo = true,
-        disable_splash_rendering = true,
-        force_default_wallpaper = 0,
-        vrr = 1,
-        mouse_move_enables_dpms = true,
-        key_press_enables_dpms = true,
-    },
+	misc = {
+		disable_hyprland_logo = true,
+		disable_splash_rendering = true,
+		force_default_wallpaper = 0,
+		vrr = 1,
+		mouse_move_enables_dpms = true,
+		key_press_enables_dpms = true,
+	},
 })
 
 -- Animation curves
 hl.curve("premium", {
-    type = "bezier",
-    points = {
-        { 0.16, 1 },
-        { 0.3,  1 },
-    },
+	type = "bezier",
+	points = {
+		{ 0.16, 1 },
+		{ 0.3, 1 },
+	},
 })
 
 hl.curve("smoothOut", {
-    type = "bezier",
-    points = {
-        { 0.36, 0 },
-        { 0.66, -0.56 },
-    },
+	type = "bezier",
+	points = {
+		{ 0.36, 0 },
+		{ 0.66, -0.56 },
+	},
 })
 
 hl.curve("smoothIn", {
-    type = "bezier",
-    points = {
-        { 0.25, 1 },
-        { 0.5,  1 },
-    },
+	type = "bezier",
+	points = {
+		{ 0.25, 1 },
+		{ 0.5, 1 },
+	},
 })
 
 hl.curve("almostLinear", {
-    type = "bezier",
-    points = {
-        { 0.5,  0.5 },
-        { 0.75, 1 },
-    },
+	type = "bezier",
+	points = {
+		{ 0.5, 0.5 },
+		{ 0.75, 1 },
+	},
 })
 
 hl.animation({
-    leaf = "global",
-    enabled = true,
-    speed = 10,
-    bezier = "default",
+	leaf = "global",
+	enabled = true,
+	speed = 10,
+	bezier = "default",
 })
 
 hl.animation({
-    leaf = "windows",
-    enabled = true,
-    speed = 5,
-    bezier = "premium",
+	leaf = "windows",
+	enabled = true,
+	speed = 5,
+	bezier = "premium",
 })
 
 hl.animation({
-    leaf = "windowsIn",
-    enabled = true,
-    speed = 5,
-    bezier = "premium",
-    style = "popin 87%",
+	leaf = "windowsIn",
+	enabled = true,
+	speed = 5,
+	bezier = "premium",
+	style = "popin 87%",
 })
 
 hl.animation({
-    leaf = "windowsOut",
-    enabled = true,
-    speed = 4,
-    bezier = "smoothOut",
-    style = "popin 87%",
+	leaf = "windowsOut",
+	enabled = true,
+	speed = 4,
+	bezier = "smoothOut",
+	style = "popin 87%",
 })
 
 hl.animation({
-    leaf = "border",
-    enabled = true,
-    speed = 8,
-    bezier = "default",
+	leaf = "border",
+	enabled = true,
+	speed = 8,
+	bezier = "default",
 })
 
 hl.animation({
-    leaf = "fade",
-    enabled = true,
-    speed = 5,
-    bezier = "smoothIn",
+	leaf = "fade",
+	enabled = true,
+	speed = 5,
+	bezier = "smoothIn",
 })
 
 hl.animation({
-    leaf = "workspaces",
-    enabled = true,
-    speed = 5,
-    bezier = "almostLinear",
-    style = "fade",
+	leaf = "workspaces",
+	enabled = true,
+	speed = 5,
+	bezier = "almostLinear",
+	style = "fade",
 })
 
 hl.animation({
-    leaf = "layers",
-    enabled = true,
-    speed = 4,
-    bezier = "premium",
+	leaf = "layers",
+	enabled = true,
+	speed = 4,
+	bezier = "premium",
 })
 
 -- Noctalia binds
@@ -234,18 +232,18 @@ hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(controlCenter))
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(settings))
 
 hl.bind(mainMod .. " + Grave", hl.dsp.workspace.toggle_special("scratchpad"), {
-    description = "Toggle scratchpad",
+	description = "Toggle scratchpad",
 })
 
 hl.bind(
-    mainMod .. " + SHIFT + Grave",
-    hl.dsp.window.move({
-        workspace = "special:scratchpad",
-        silent = true,
-    }),
-    {
-        description = "Move window to scratchpad",
-    }
+	mainMod .. " + SHIFT + Grave",
+	hl.dsp.window.move({
+		workspace = "special:scratchpad",
+		silent = true,
+	}),
+	{
+		description = "Move window to scratchpad",
+	}
 )
 
 -- Apps
@@ -294,11 +292,11 @@ hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "down" })
 
 -- Workspaces
 for i = 1, 10 do
-    local key = tostring(i % 10)
+	local key = tostring(i % 10)
 
-    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
-    hl.bind(mainMod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = i, silent = true }))
+	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+	hl.bind(mainMod .. " + CTRL + " .. key, hl.dsp.window.move({ workspace = i, silent = true }))
 end
 
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -306,160 +304,160 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Mouse
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), {
-    mouse = true,
+	mouse = true,
 })
 
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), {
-    mouse = true,
+	mouse = true,
 })
 
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("bash -lc '" .. noctaliaMsg .. " volume-up || pamixer -i 5'"), {
-    locked = true,
-    repeating = true,
+	locked = true,
+	repeating = true,
 })
 
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("bash -lc '" .. noctaliaMsg .. " volume-down || pamixer -d 5'"), {
-    locked = true,
-    repeating = true,
+	locked = true,
+	repeating = true,
 })
 
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("bash -lc '" .. noctaliaMsg .. " volume-mute || pamixer -t'"), {
-    locked = true,
+	locked = true,
 })
 
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("pamixer --default-source -t"), {
-    locked = true,
+	locked = true,
 })
 
 hl.bind(
-    "XF86MonBrightnessUp",
-    hl.dsp.exec_cmd("bash -lc '" .. noctaliaMsg .. " brightness-up || brightnessctl set 5%+'"),
-    {
-        locked = true,
-        repeating = true,
-    }
+	"XF86MonBrightnessUp",
+	hl.dsp.exec_cmd("bash -lc '" .. noctaliaMsg .. " brightness-up || brightnessctl set 5%+'"),
+	{
+		locked = true,
+		repeating = true,
+	}
 )
 
 hl.bind(
-    "XF86MonBrightnessDown",
-    hl.dsp.exec_cmd("bash -lc '" .. noctaliaMsg .. " brightness-down || brightnessctl set 5%-'"),
-    {
-        locked = true,
-        repeating = true,
-    }
+	"XF86MonBrightnessDown",
+	hl.dsp.exec_cmd("bash -lc '" .. noctaliaMsg .. " brightness-down || brightnessctl set 5%-'"),
+	{
+		locked = true,
+		repeating = true,
+	}
 )
 
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), {
-    locked = true,
+	locked = true,
 })
 
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), {
-    locked = true,
+	locked = true,
 })
 
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), {
-    locked = true,
+	locked = true,
 })
 
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), {
-    locked = true,
+	locked = true,
 })
 
 -- Window rules
 hl.window_rule({
-    name = "pavucontrol-float",
-    match = { class = "pavucontrol" },
-    float = true,
+	name = "pavucontrol-float",
+	match = { class = "pavucontrol" },
+	float = true,
 })
 
 hl.window_rule({
-    name = "blueman-float",
-    match = { class = "blueman-manager" },
-    float = true,
+	name = "blueman-float",
+	match = { class = "blueman-manager" },
+	float = true,
 })
 
 hl.window_rule({
-    name = "network-editor-float",
-    match = { class = "nm-connection-editor" },
-    float = true,
+	name = "network-editor-float",
+	match = { class = "nm-connection-editor" },
+	float = true,
 })
 
 hl.window_rule({
-    name = "nautilus-properties-float",
-    match = {
-        class = "org.gnome.Nautilus",
-        title = "Properties",
-    },
-    float = true,
+	name = "nautilus-properties-float",
+	match = {
+		class = "org.gnome.Nautilus",
+		title = "Properties",
+	},
+	float = true,
 })
 
 hl.window_rule({
-    name = "picture-in-picture",
-    match = { title = "Picture-in-Picture" },
-    float = true,
-    pin = true,
-    keep_aspect_ratio = true,
+	name = "picture-in-picture",
+	match = { title = "Picture-in-Picture" },
+	float = true,
+	pin = true,
+	keep_aspect_ratio = true,
 })
 
 hl.window_rule({
-    name = "kitty-opacity",
-    match = { class = "kitty" },
-    opacity = "0.92 0.88",
+	name = "kitty-opacity",
+	match = { class = "kitty" },
+	opacity = "0.92 0.88",
 })
 
 hl.window_rule({
-    name = "alacritty-opacity",
-    match = { class = "Alacritty" },
-    opacity = "0.95 0.90",
+	name = "alacritty-opacity",
+	match = { class = "Alacritty" },
+	opacity = "0.95 0.90",
 })
 
 hl.window_rule({
-    name = "firefox-workspace",
-    match = { class = "firefox" },
-    workspace = "2",
+	name = "firefox-workspace",
+	match = { class = "firefox" },
+	workspace = "2",
 })
 
 hl.window_rule({
-    name = "code-workspace",
-    match = { class = "code" },
-    workspace = "3",
+	name = "code-workspace",
+	match = { class = "code" },
+	workspace = "3",
 })
 
 hl.window_rule({
-    name = "zed-workspace",
-    match = { class = "Zed" },
-    workspace = "3",
+	name = "zed-workspace",
+	match = { class = "Zed" },
+	workspace = "3",
 })
 
 hl.window_rule({
-    name = "vesktop-workspace",
-    match = { class = "vesktop" },
-    workspace = "4",
+	name = "vesktop-workspace",
+	match = { class = "vesktop" },
+	workspace = "4",
 })
 
 hl.window_rule({
-    name = "steam-workspace",
-    match = { class = "steam" },
-    workspace = "5",
+	name = "steam-workspace",
+	match = { class = "steam" },
+	workspace = "5",
 })
 
 -- Noctalia layer rules
 hl.layer_rule({
-    name = "noctalia-bar-blur",
-    match = {
-        namespace = "^noctalia-bar-.+$",
-    },
-    ignore_alpha = 0.5,
-    blur = true,
-    blur_popups = true,
+	name = "noctalia-bar-blur",
+	match = {
+		namespace = "^noctalia-bar-.+$",
+	},
+	ignore_alpha = 0.5,
+	blur = true,
+	blur_popups = true,
 })
 
 hl.layer_rule({
-    name = "noctalia-panel-blur",
-    match = {
-        namespace = "^noctalia-(notification|dock|panel|osd)$",
-    },
-    ignore_alpha = 0.5,
-    blur = true,
-    blur_popups = true,
+	name = "noctalia-panel-blur",
+	match = {
+		namespace = "^noctalia-(notification|dock|panel|osd)$",
+	},
+	ignore_alpha = 0.5,
+	blur = true,
+	blur_popups = true,
 })

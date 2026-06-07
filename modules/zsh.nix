@@ -62,7 +62,9 @@
     };
 
     initContent = ''
+      export PATH="$HOME/.local/bin:$PATH"
       # fzf helpers
+
       bindkey '^[[A' history-substring-search-up
       bindkey '^[[B' history-substring-search-down
 
@@ -83,6 +85,10 @@
       }
     '';
   };
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
 
   programs.zoxide = {
     enable = true;

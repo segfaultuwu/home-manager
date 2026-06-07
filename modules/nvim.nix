@@ -16,6 +16,8 @@
       nil
       nixfmt
 
+      gleam
+
       lua-language-server
       stylua
 
