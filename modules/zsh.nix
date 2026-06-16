@@ -78,7 +78,7 @@
       zstyle ':completion:*' menu select
       zstyle ':completion:*' group-name '''
       zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
-
+      eval "$(direnv hook zsh)"
       # Nice prompt spacing
       precmd() {
         print -Pn ""

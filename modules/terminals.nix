@@ -6,7 +6,7 @@
 
     settings = {
       # Font
-      font_family = "JetBrainsMono Nerd Font";
+      font_family = "IosevkaTerm Nerd Font";
       bold_font = "auto";
       italic_font = "auto";
       bold_italic_font = "auto";
@@ -61,6 +61,10 @@
       allow_remote_control = true;
       listen_on = "unix:/tmp/kitty";
     };
+
+    extraConfig = ''
+      include ${config.home.homeDirectory}/.config/kitty/themes/noctalia.conf
+    '';
 
     keybindings = {
       "ctrl+shift+enter" = "new_window";

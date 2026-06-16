@@ -1,6 +1,14 @@
 { config, pkgs, ... }:
 
 {
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     vesktop
     prismlauncher
@@ -8,11 +16,17 @@
     telegram-desktop
     thunderbird
 
-    desktop-file-utils
+    nerd-fonts.iosevka
 
+    desktop-file-utils
+    direnv
+    nix-direnv
     bun
 
     gleam
+    crystal
+    shards
+    crystalline
 
     onefetch
     tokei
@@ -21,7 +35,6 @@
     yazi
     zoxide
     atuin
-
     nil
     nixfmt-rfc-style
     alejandra
@@ -39,6 +52,12 @@
     pcmanfm
     lxqt.lxqt-archiver
     gvfs
+
+    # music
+    lmms
+    audacity
+    ardour
+    qpwgraph
 
     # Catppuccin GTK
     catppuccin-gtk

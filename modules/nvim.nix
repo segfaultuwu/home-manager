@@ -18,6 +18,10 @@
 
       gleam
 
+      crystal
+      shards
+      crystalline
+
       lua-language-server
       stylua
 
@@ -37,6 +41,8 @@
 
       bash-language-server
       shfmt
+
+      rust-analyzer
 
       ripgrep
       fd

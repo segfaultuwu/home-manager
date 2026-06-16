@@ -76,13 +76,13 @@ hl.config({
 		col = {
 			active_border = {
 				colors = {
-					"rgba(cba6f7ff)",
-					"rgba(89b4faff)",
+					"#111111",
+					"#101010",
 				},
 				angle = 45,
 			},
 
-			inactive_border = "rgba(313244aa)",
+			inactive_border = "#000000",
 		},
 	},
 
@@ -430,12 +430,6 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "vesktop-workspace",
-	match = { class = "vesktop" },
-	workspace = "4",
-})
-
-hl.window_rule({
 	name = "steam-workspace",
 	match = { class = "steam" },
 	workspace = "5",
@@ -461,3 +455,17 @@ hl.layer_rule({
 	blur = true,
 	blur_popups = true,
 })
+
+-- SGS Shell window rules
+hl.layer_rule({
+	name = "sgs-bar-blur",
+	match = {
+		namespace = "^sgs",
+	},
+	ignore_alpha = 0.5,
+	blur = true,
+	blur_popups = true,
+})
+
+-- Noctalia generated colors
+dofile(os.getenv("HOME") .. "/.config/hypr/noctalia.lua")

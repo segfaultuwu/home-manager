@@ -23,10 +23,23 @@ local servers = {
 	emmet_language_server = {},
 	pyright = {},
 	ruff = {},
-	clangd = {},
+	clangd = {
+		cmd = {
+			"clangd",
+			"--background-index",
+			"--clang-tidy",
+			"--query-driver=/nix/store/*/bin/g++,/nix/store/*/bin/gcc,/nix/store/*/bin/clang++,/nix/store/*/bin/clang",
+		},
+	},
 	bashls = {},
 	ts_ls = {},
+	rust_analyzer = {},
 	gleam = {},
+	crystalline = {
+		cmd = { "crystalline" },
+		filetypes = { "crystal" },
+		root_markers = { "shard.yml", ".git" },
+	},
 }
 
 for name, opts in pairs(servers) do
